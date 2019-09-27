@@ -1,0 +1,2 @@
+export const FETCH_TARGETS = 'FETCH_TARGETS'
+export const FETCH_EXECTORS = 'FETCH_EXECTORS'

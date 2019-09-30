@@ -2,7 +2,7 @@ import '@tarojs/async-await'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 
-import Index from './pages/index'
+import Index from './pages/task/createtask'
 
 import configStore from './store'
 
@@ -25,7 +25,7 @@ class App extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    pages: ['pages/auth/login', 'pages/index/index'],
+    pages: ['pages/auth/login', 'pages/task/createtask', 'pages/task/task'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

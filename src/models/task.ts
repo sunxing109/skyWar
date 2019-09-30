@@ -1,11 +1,25 @@
 /**
+ * 任务模型
+ * 任务状态：started ended
+ */
+export interface Task {
+  taskId: string
+  target: Target
+  startPostion: StartPosition
+  executor: Executor
+  result: string
+  taskStatus: string
+}
+
+/**
  * 任务模型,防护半径单位:KM
  */
-export interface TaskTarget {
+export interface Target {
   taskTargetId: string
   taskTargetName: string
-  longitude: string
-  latitude: string
+  longitude: number
+  latitude: number
+  altitude: number
   oneLevelDefenseRadius: number
   twoLevelDefenseRadius: number
   threeLevelDefenseRadius: number
@@ -15,9 +29,11 @@ export interface TaskTarget {
  * 起飞位置模型
  */
 export interface StartPosition {
+  startPositionId: string
   startPositionName: string
-  longitude: string
-  latitude: string
+  longitude: number
+  latitude: number
+  altitude: number
 }
 
 /**

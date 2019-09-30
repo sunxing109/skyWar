@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux'
-import task, { TaskState } from './task'
+import task from './task'
 
-export interface IRootState {
-  task: TaskState
-}
-
-export default combineReducers<IRootState>({
+export default combineReducers({
   task
 })

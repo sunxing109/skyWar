@@ -1,10 +1,8 @@
-import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { AtButton, AtForm, AtInput } from 'taro-ui'
+import { View } from '@tarojs/components'
+import { AtButton } from 'taro-ui'
 
-import { add, minus, asyncAdd } from '../../actions/task'
+// import { add, minus, asyncAdd } from '../../actions/task'
 
 // import './index.scss'
 
@@ -18,41 +16,7 @@ import { add, minus, asyncAdd } from '../../actions/task'
 //
 // #endregion
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
-}
-
-type PageDispatchProps = {
-  add: () => void
-}
-
-type PageOwnProps = {}
-
-type PageState = {}
-
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
-
-// interface Login {
-//   props: IProps
-// }
-
-interface Istate {
-  value: string
-}
-
-@connect(
-  ({ counter }) => ({
-    counter
-  }),
-  dispatch => ({
-    add() {
-      dispatch(add())
-    }
-  })
-)
-class Login extends Component<IProps, Istate> {
+class Login extends Component {
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -61,65 +25,18 @@ class Login extends Component<IProps, Istate> {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '登录'
+    navigationBarTitleText: '欢迎体验'
   }
 
-  constructor() {
-    super(...arguments)
-    this.state = {
-      value: ''
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
-
-  handleChange(value) {
-    this.setState({
-      value: value
-    })
-  }
-
-  onSubmit(event) {
-    console.log(event)
-  }
-  onReset() {
-    this.setState({
-      value: ''
-    })
-  }
   handleRedirect() {
     Taro.redirectTo({
-      url: '../index/index'
+      url: '../task/createtask'
     })
   }
   render() {
-    const { value } = this.state
     return (
       <View className="index">
-        <AtForm
-          onSubmit={this.onSubmit.bind(this)}
-          onReset={this.onReset.bind(this)}
-        >
-          <AtInput
-            name="value"
-            title="文本"
-            type="text"
-            placeholder="单行文本"
-            value={value}
-            onChange={this.handleChange.bind(this)}
-          />
-          <AtButton formType="submit">提交</AtButton>
-          <AtButton formType="reset">重置1</AtButton>
-          <AtButton onClick={this.handleRedirect.bind(this)}>返回</AtButton>
-        </AtForm>
+        <AtButton onClick={this.handleRedirect.bind(this)}>开始游戏</AtButton>
       </View>
     )
   }
@@ -132,4 +49,4 @@ class Login extends Component<IProps, Istate> {
 //
 // #endregion
 
-export default Login as ComponentClass<PageOwnProps, PageState>
+export default Login

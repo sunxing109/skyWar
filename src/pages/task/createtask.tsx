@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { AtButton, AtForm, AtRadio } from 'taro-ui'
+import { AtButton, AtForm, AtRadio,AtFab } from 'taro-ui'
 import { Target, Executor, StartPosition, Task } from '../../models/task'
 import { fetchTargets, fetchExecutors, startTask } from '../../actions/task'
 import './task.scss'
@@ -183,8 +183,9 @@ class task extends Component<IProps, Istate> {
             onClick={this.handleChangeExecutor.bind(this)}
           />
           <AtButton formType="submit">确定</AtButton>
-          <AtButton onClick={this.handleRedirect.bind(this)}>返回</AtButton>
+          
         </AtForm>
+        <AtFab className="atbu-fab" onClick={()=>Taro.redirectTo({url:"../auth/login"})}>首页</AtFab>
       </View>
     )
   }

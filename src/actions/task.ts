@@ -6,7 +6,7 @@ import {
 } from '../constants/task'
 import { axios } from 'taro-axios'
 // import mqtt from 'mqtt/dist/mqtt.js'
-import mqtt from 'mqtt/dist/mqtt'
+// import mqtt from 'mqtt'
 /**
  * 异步的action
  * 获取执行任务目标
@@ -105,7 +105,7 @@ export function sendCommond(time: number, command: string, flyRoute: []) {
  * 起飞
  */
 export function tackOff() {
-  const client = mqtt.connect('ws://192.168.200.206:1888')
+  // const client = mqtt.connect('ws://192.168.200.206:1888')
   // const MQTT_TOPIC_DRONE_COMMAND = 'sim/command/DRONE_ID'
   // client.publish(MQTT_TOPIC_DRONE_COMMAND, 'hello world!')
   // client.subscribe(MQTT_TOPIC_DRONE_COMMAND, function(err) {

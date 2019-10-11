@@ -195,7 +195,7 @@ class task extends Component<IProps, Istate> {
           <AtButton formType="submit">确定</AtButton>
           
         </AtForm>
-        <AtFab className="atbu-fab" onClick={()=>Taro.redirectTo({url:"../auth/login"})}>首页</AtFab>
+        <AtFab className="atbu-fab" onClick={()=>Taro.redirectTo({url:"../index/index"})}>首页</AtFab>
       </View>
     )
   }

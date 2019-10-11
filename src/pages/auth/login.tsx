@@ -2,7 +2,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem ,Image} from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 // import { add, minus, asyncAdd } from '../../actions/task'
-import './login.scss'
+// import './login.scss'
 
 // #region 书写注意
 //
@@ -13,9 +13,6 @@ import './login.scss'
 // ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
 //
 // #endregion
-interface Istate {
-  images:any[]
-}
 interface Istate {
   images:any[]
 }
@@ -30,18 +27,11 @@ class Login extends Component<IProps,Istate> {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '欢迎体验'
+    navigationBarTitleText: '登录'
   }
 
   constructor(){
     super();
-    this.state = {
-      images:[
-        {id:1,url:'https://picsum.photos/id/256/200/300'},
-        {id:2,url:'https://picsum.photos/id/1015/200/300'},
-        {id:3,url:'https://picsum.photos/id/102/200/300'}
-      ]
-    }
   }
 
   handleRedirect() {
@@ -50,24 +40,8 @@ class Login extends Component<IProps,Istate> {
     })
   }
   render() {
-    const {images} = this.state
     return (
-      <View className="index">
-        <Swiper 
-          indicatorColor="#999"
-          indicatorActiveColor="#333"
-          circular
-          indicatorDots
-          autoplay>
-            {images.map(image=>(
-              <SwiperItem key={image.id} >
-                <Image  src={image.url}/>
-              </SwiperItem>)
-            )}
-          </Swiper>
-         
-        <AtButton onClick={this.handleRedirect.bind(this)}>开始游戏</AtButton>
-
+      <View >
         <AtButton onClick={this.handleRedirect.bind(this)}>登录</AtButton>
       </View>
     )

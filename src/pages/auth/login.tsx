@@ -68,6 +68,7 @@ class Login extends Component<IProps,Istate> {
          
         <AtButton onClick={this.handleRedirect.bind(this)}>开始游戏</AtButton>
 
+        <AtButton onClick={this.handleRedirect.bind(this)}>登录</AtButton>
       </View>
     )
   }

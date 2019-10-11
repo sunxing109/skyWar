@@ -34,7 +34,7 @@ const config = {
   },
   weapp: {
     compile: {
-      exclude: ['node_modules/mqtt/dist/mqtt.js']
+      exclude: ['node_modules/mqtt/dist/mqtt.min.js']
     },
     module: {
       postcss: {

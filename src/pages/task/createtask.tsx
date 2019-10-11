@@ -4,7 +4,12 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { AtButton, AtForm, AtRadio,AtFab } from 'taro-ui'
 import { Target, Executor, StartPosition, Task } from '../../models/task'
-import { fetchTargets, fetchExecutors, startTask } from '../../actions/task'
+import {
+  fetchTargets,
+  fetchExecutors,
+  startTask,
+  resetTask
+} from '../../actions/task'
 import './task.scss'
 
 // #region 书写注意
@@ -32,6 +37,7 @@ type PageDispatchProps = {
     startPostion: StartPosition,
     executor: Executor
   ) => void
+  resetTask: () => void
 }
 
 type PageOwnProps = {}
@@ -57,6 +63,9 @@ interface Istate {
     task: task.task
   }),
   dispatch => ({
+    resetTask() {
+      dispatch(resetTask())
+    },
     fetchTargets() {
       dispatch(fetchTargets())
     },
@@ -89,6 +98,7 @@ class task extends Component<IProps, Istate> {
   }
 
   componentDidMount() {
+    this.props.resetTask()
     // 初始化数据
     this.props.fetchTargets()
     this.props.fetchExecutors()
@@ -133,7 +143,7 @@ class task extends Component<IProps, Istate> {
 
   handleRedirect() {
     Taro.redirectTo({
-      url: '../auth/login'
+      url: '../index/index'
     })
   }
 

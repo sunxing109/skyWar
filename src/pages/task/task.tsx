@@ -4,26 +4,19 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { AtButton, AtCard } from 'taro-ui'
 import { Task } from '../../models/task'
-import { endTask, tackOff } from '../../actions/task'
+import { endTask } from '../../actions/task'
+import { webSocketConnect } from '../../utils'
 import './task.scss'
-
-// #region 书写注意
-//
-// 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
-// 需要显示声明 connect 的参数类型并通过 interface 的方式指定 Taro.Component 子类的 props
-// 这样才能完成类型检查和 IDE 的自动提示
-// 使用函数模式则无此限制
-// ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
-//
-// #endregion
 
 type PageStateProps = {
   task: Task
+  isOpenedModal: boolean
 }
 
 type PageDispatchProps = {
   endTask: () => void
   tackOff: () => void
+  receiveMessage: (message: string) => void
 }
 
 type PageOwnProps = {}
@@ -44,9 +37,6 @@ interface Istate {}
   dispatch => ({
     endTask() {
       dispatch(endTask())
-    },
-    tackOff() {
-      dispatch(tackOff())
     }
   })
 )
@@ -61,45 +51,86 @@ class task extends Component<IProps, Istate> {
   config: Config = {
     navigationBarTitleText: '执行任务中'
   }
+  constructor(props) {
+    super(props)
 
+    this.handleTackOff = this.handleTackOff.bind(this)
+    this.handleGoHome = this.handleGoHome.bind(this)
+    this.handleFire = this.handleFire.bind(this)
+    webSocketConnect()
+  }
   componentDidMount() {}
+
   componentWillUpdate(nextProps) {
     if (nextProps.task.taskStatus === 'ended') {
       console.log('nextProps')
       console.log(nextProps)
 
       Taro.redirectTo({
-        url: '../auth/login'
+        url: '../index/index'
       })
     }
   }
+  componentwillUnmount() {}
   /**
    * 退出游戏
    */
-  handleEndedTask() {
-    this.props.endTask()
-  }
+  // handleEndedTask() {
+  //   Taro.sendSocketMessage({
+  //     data: 'goHome'
+  //   })
+  //   Taro.redirectTo({ url: './taskResult' })
+  // }
+
   /**
    * 起飞
    */
   handleTackOff() {
-    this.props.tackOff()
+    Taro.sendSocketMessage({
+      data: 'tackOff'
+    })
   }
+
   /**
    * 返航
    */
   handleGoHome() {
-    this.props.endTask()
+    Taro.sendSocketMessage({
+      data: 'goHome'
+    })
   }
+
   /**
    * 开火
    */
   handleFire() {
-    this.props.endTask()
+    Taro.sendSocketMessage({
+      data: 'fire'
+    })
   }
 
   render() {
     const { task } = this.props
+    Taro.onSocketMessage(function(res) {
+      const data = res.data
+      let message: Object = JSON.parse(data)
+
+      if (message['score']) {
+        Taro.redirectTo({ url: './taskResult?score=' + message['score'] })
+      }
+      if (message['warningMessage']) {
+        Taro.showModal({
+          title: '警告',
+          content: message['warningMessage'] + '是否返航'
+        }).then(res => {
+          if (res.confirm) {
+            Taro.sendSocketMessage({
+              data: 'goHome'
+            })
+          }
+        })
+      }
+    })
     return (
       <view>
         <View className="at-row">
@@ -117,12 +148,10 @@ class task extends Component<IProps, Istate> {
           </View>
         </View>
         <View className="at-row">
-          <AtButton onClick={this.handleTackOff.bind(this)}>起飞</AtButton>
-          <AtButton onClick={this.handleGoHome.bind(this)}>返航</AtButton>
-          <AtButton onClick={this.handleFire.bind(this)}>开火</AtButton>
-          <AtButton onClick={this.handleEndedTask.bind(this)}>
-            退出游戏
-          </AtButton>
+          <AtButton onClick={this.handleTackOff}>起飞</AtButton>
+          <AtButton onClick={this.handleGoHome}>返航</AtButton>
+          <AtButton onClick={this.handleFire}>开火</AtButton>
+          {/* <AtButton onClick={this.handleEndedTask}>退出游戏</AtButton> */}
         </View>
       </view>
     )

@@ -14,7 +14,7 @@ import './app.scss'
 //   require('nerv-devtools')
 // }
 
-const store = configStore()
+export const store = configStore()
 
 class App extends Component {
   /**
@@ -25,7 +25,13 @@ class App extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    pages: ['pages/auth/login', 'pages/task/createtask', 'pages/task/task'],
+    pages: [
+      'pages/index/index',
+      'pages/auth/login',
+      'pages/task/createtask',
+      'pages/task/task',
+      'pages/task/taskResult'
+    ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

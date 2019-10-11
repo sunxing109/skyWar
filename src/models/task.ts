@@ -9,6 +9,8 @@ export interface Task {
   executor: Executor
   result: string
   taskStatus: string
+  warningMessage: string
+  warningModal: boolean
 }
 
 /**

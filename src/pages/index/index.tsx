@@ -1,10 +1,10 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Component, Config, SocketTask } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 
 // import { add, minus, asyncAdd } from '../../actions/task'
 
-// import './index.scss'
+import './index.scss'
 
 // #region 书写注意
 //
@@ -27,7 +27,7 @@ class Login extends Component {
   config: Config = {
     navigationBarTitleText: '欢迎体验'
   }
-
+  componentDidMount() {}
   handleRedirect() {
     Taro.redirectTo({
       url: '../task/createtask'
@@ -36,17 +36,10 @@ class Login extends Component {
   render() {
     return (
       <View className="index">
-        <AtButton onClick={this.handleRedirect.bind(this)}>登录</AtButton>
+        <AtButton onClick={this.handleRedirect.bind(this)}>开始游戏</AtButton>
       </View>
     )
   }
 }
-
-// #region 导出注意
-//
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
 
 export default Login

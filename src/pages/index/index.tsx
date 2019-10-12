@@ -1,6 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem ,Image} from '@tarojs/components'
-import { AtButton,AtFab } from 'taro-ui'
+import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
+import { AtButton, AtFab } from 'taro-ui'
 
 // import { add, minus, asyncAdd } from '../../actions/task'
 
@@ -16,11 +16,10 @@ import './index.scss'
 //
 // #endregion
 interface Istate {
-  images:any[]
+  images: any[]
 }
-interface IProps{
-}
-class Login extends Component<IProps,Istate> {
+interface IProps {}
+class Login extends Component<IProps, Istate> {
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -31,13 +30,13 @@ class Login extends Component<IProps,Istate> {
   config: Config = {
     navigationBarTitleText: '欢迎体验'
   }
-  constructor(){
-    super();
+  constructor() {
+    super()
     this.state = {
-      images:[
-        {id:1,url:'https://picsum.photos/id/256/200/300'},
-        {id:2,url:'https://picsum.photos/id/1015/200/300'},
-        {id:3,url:'https://picsum.photos/id/102/200/300'}
+      images: [
+        { id: 1, url: 'https://picsum.photos/id/256/200/300' },
+        { id: 2, url: 'https://picsum.photos/id/1015/200/300' },
+        { id: 3, url: 'https://picsum.photos/id/102/200/300' }
       ]
     }
   }
@@ -48,23 +47,23 @@ class Login extends Component<IProps,Istate> {
     })
   }
   render() {
-    const {images} = this.state
+    const { images } = this.state
     return (
       <View className="index">
-        <Swiper 
+        <Swiper
           indicatorColor="#999"
           indicatorActiveColor="#333"
           circular
           indicatorDots
-          autoplay>
-            {images.map(image=>(
-              <SwiperItem key={image.id} >
-                <Image  src={image.url}/>
-              </SwiperItem>)
-            )}
-          </Swiper>
+          autoplay
+        >
+          {images.map(image => (
+            <SwiperItem key={image.id}>
+              <Image src={image.url} />
+            </SwiperItem>
+          ))}
+        </Swiper>
         <AtButton onClick={this.handleRedirect.bind(this)}>开始游戏</AtButton>
-        <AtFab className="homeStyle" >首页</AtFab>
       </View>
     )
   }

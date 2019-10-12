@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { AtButton, AtCard,AtFab } from 'taro-ui'
+import { AtButton, AtCard, AtFab } from 'taro-ui'
 import { Task } from '../../models/task'
 import { endTask, resetTask } from '../../actions/task'
 import { closeConnect } from '../../utils'
@@ -115,8 +115,10 @@ class taskResult extends Component<IProps, Istate> {
           </View>
         </View>
         <View className="at-row">
-          <AtButton onClick={this.handleOnceAgain}>在玩一次</AtButton>
-          <AtFab className="atbu-fab" onClick={this.handleGoHome}>首页</AtFab>
+          <AtButton onClick={this.handleOnceAgain}>再玩一次</AtButton>
+          <AtFab className="atbu-fab" onClick={this.handleGoHome}>
+            首页
+          </AtFab>
         </View>
       </view>
     )
